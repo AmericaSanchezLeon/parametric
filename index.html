@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Muro Paramétrico</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<div class="app">
+  <header>
+    <h1>Muro Paramétrico</h1>
+    <p class="subtitle">Diseña la elevación de un muro de tabique/block y exporta el resultado a DXF.</p>
+  </header>
+
+  <main>
+    <section class="panel" id="form-panel">
+      <h2>Parámetros del muro</h2>
+      <div class="field-grid">
+        <label>Ancho del muro (mm)
+          <input type="number" id="wallWidth" value="3000" min="100" step="10" />
+        </label>
+        <label>Altura del muro (mm)
+          <input type="number" id="wallHeight" value="2400" min="100" step="10" />
+        </label>
+      </div>
+
+      <h3>Pieza</h3>
+      <div class="field-grid">
+        <label>Preset
+          <select id="unitPreset">
+            <option value="block">Block hueco 400×200</option>
+            <option value="brick">Tabique 240×60</option>
+            <option value="custom">Personalizado</option>
+          </select>
+        </label>
+        <label>Junta / mortero (mm)
+          <input type="number" id="joint" value="10" min="0" step="1" />
+        </label>
+        <label>Largo de pieza (mm)
+          <input type="number" id="unitLength" value="400" min="10" step="5" />
+        </label>
+        <label>Alto de pieza (mm)
+          <input type="number" id="unitHeight" value="200" min="10" step="5" />
+        </label>
+        <label>Aparejo
+          <select id="bond">
+            <option value="running">Cuatrapeado (a hueso corrido)</option>
+            <option value="stack">A plomo (juntas alineadas)</option>
+          </select>
+        </label>
+      </div>
+
+      <h3>Aberturas (puertas / ventanas)</h3>
+      <table class="openings-table" id="openingsTable">
+        <thead>
+          <tr><th>X</th><th>Y</th><th>Ancho</th><th>Alto</th><th></th></tr>
+        </thead>
+        <tbody id="openingsBody"></tbody>
+      </table>
+      <button type="button" id="addOpening" class="secondary">+ Agregar abertura</button>
+
+      <div class="actions">
+        <button type="button" id="downloadDxf" class="primary">Descargar DXF</button>
+      </div>
+
+      <div class="stats" id="stats"></div>
+    </section>
+
+    <section class="panel" id="preview-panel">
+      <h2>Vista previa</h2>
+      <div class="svg-wrap">
+        <svg id="preview" xmlns="http://www.w3.org/2000/svg"></svg>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="js/wall-geometry.js"></script>
+<script src="js/dxf-writer.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
